@@ -16,6 +16,16 @@ public class User {
     // 头像
     private String head;
 
+    /*private Integer isDel;
+
+    public Integer getIsDel() {
+        return isDel;
+    }
+
+    public void setIsDel(Integer isDel) {
+        this.isDel = isDel;
+    }*/
+
     public User(Integer id, String userName, String userPwd, String nick, String mood, String head) {
         this.id = id;
         this.userName = userName;
