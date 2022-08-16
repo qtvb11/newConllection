@@ -18,6 +18,7 @@ import java.util.*;
 public class NoteTypeService01 {
 
     private List<User> users;
+    private List<NoteType> noteTypes;
     private Map<Integer,NoteType> noteTypeMap;
 
     private List<Map<String,Object>> noteList=null;
@@ -75,11 +76,11 @@ public class NoteTypeService01 {
             throw new RuntimeException("userId不存在");
         }
 
-        List<NoteType> noteTypeList=this.listNoteType(noteType.getUserId());
-        long count = noteTypeList.stream().filter(noteType1 -> noteType1.getTypeName().equals(noteType.getTypeName())).count();
-        if (count==1) {
-            throw new RuntimeException("类别名已经存在");
-        }
+//        List<NoteType> noteTypeList=this.listNoteType(noteType.getUserId());
+//        long count = noteTypeList.stream().filter(noteType1 -> noteType1.getTypeName().equals(noteType.getTypeName())).count();
+//        if (count==1) {
+//            throw new RuntimeException("类别名已经存在");
+//        }
 
 
         noteTypeMap.put(5,noteType);
@@ -97,7 +98,7 @@ public class NoteTypeService01 {
      * @param userId
      * @return
      */
-    public List<NoteType> listNoteType(Integer userId){
+    public void listNoteType(Integer userId){
         if(!userIdExist(userId)){
             throw new RuntimeException("用户名非法");
         }
@@ -105,9 +106,11 @@ public class NoteTypeService01 {
         for (Map.Entry<Integer, NoteType> entry:entries) {
             if(entry.getValue().getUserId()==userId){
                 System.out.println(entry.getValue());
+                noteTypes.add(entry.getValue());
             }
+
         }
-        return null;
+
     }
 
 
@@ -117,7 +120,9 @@ public class NoteTypeService01 {
          *    类别名 不能为空
          *    用户id 必须存在(UserService->List<User> 必须存在对应用户记录)
          *    云记类别id 必须存在
-         * 2.当前用户下类别名称不可重复
+         *
+         * 2.当前用户下类别名称不可重复(不与自身的重复)
+         *
          * 3.执行更新
          */
 

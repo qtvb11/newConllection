@@ -160,7 +160,7 @@ public class UserService {
         users.set(users.indexOf(findUserByUserId(user.getId())),user);
     }
 
-    private User findUserByUserId(Integer userId) {
+    public User findUserByUserId(Integer userId) {
         /*Integer index=null;
         for (int i = 0; i < users.size(); i++) {
             if(users.get(i).getId().equals(userId)){
