@@ -47,7 +47,7 @@ public class NoteTypeService {
         if(noteType.getUserId()==null || null == userService.findUserByUserId(noteType.getUserId())){
             throw  new RuntimeException("用户记录不存在!");
         }
-
+        //2.当前用户下类别名称不可重复
         Boolean flag = checkNoteTypeNameUnique(noteType.getTypeName(),noteType.getUserId());
         if(!flag){
             throw  new RuntimeException("云记类别名称不能重复!");
@@ -89,6 +89,7 @@ public class NoteTypeService {
             System.out.println(n);
         });
 
+        //可以返回集合 过滤后返回集合
         /*List<NoteType> noteTypes = noteTypeMap.values().stream()
                                                         .filter(n -> n.getUserId().equals(userId))
                                                         .collect(Collectors.toList());*/
@@ -101,9 +102,9 @@ public class NoteTypeService {
         /**
          * 1.参数校验
          *    类别名 不能为空
-         *    用户id 必须存在(UserService->List<User> 必须存在对应用户记录)
+         *    用户id 必须存在(思路去对应的层写方法，在这里调用UserService->List<User> 必须存在对应用户记录)
          *    云记类别id 必须存在
-         * 2.当前用户下类别名称不可重复
+         * 2.当前用户下 类别名称不可重复
          * 3.执行更新
          */
         if(null == noteType){
@@ -131,7 +132,7 @@ public class NoteTypeService {
             throw  new RuntimeException("记录不存在!");
         }*/
 
-        // 类别名唯一校验
+        //2.当前用户下 类别名称 不可重复
         for (Map.Entry<Integer, NoteType> integerNoteTypeEntry : noteTypeMap.entrySet()) {
             if(integerNoteTypeEntry.getValue().getTypeName().equals(noteType.getTypeName())
                     && !(integerNoteTypeEntry.getValue().getId().equals(noteType.getId()))

@@ -15,6 +15,13 @@ public class NoteService {
         map.put("title","hello");
         map.put("pubTime",new Date());
         noteList.add(map);
+
+        Map<String,Object> map1=new HashMap<>();
+        map1.put("id",2);
+        map1.put("typeId",1);
+        map1.put("title","test");
+        map1.put("pubTime",new Date());
+        noteList.add(map1);
     }
 
     public Integer countNoteByNoteTypeId(Integer noteTypeId) {
